@@ -1,0 +1,59 @@
+{
+  "jobs": [
+    {
+      "id": "46409ef589c2",
+      "name": "dolarbolivia: pasar el grafico a velas de 15m",
+      "prompt": "Tarea en el VPS de DolarBolivia (~/.hermes/data/dolarbolivia). El 18 oct 2026 se activó un muestreo por minuto del precio (workflow `muestreo.yml` + `tools/muestra.py`, disparado cada minuto por el cron de la VPS con `tools/disparar_muestra.sh`) para que las velas del gráfico tengan cuerpo y mecha. El gráfico de la portada quedó por defecto en velas de 1 hora porque con 15m había menos de una medición por vela y salían velas planas.\n\nAhora, 24 h después, hay que evaluar y si corresponde volver a 15m:\n\n1. Medir la densidad: en `data/historial_p2p.csv`, contar cuántas mediciones hay por bloque de 15 minutos en las últimas 24 horas (usar /usr/bin/python3). Si la mediana de mediciones por bloque es >= 5, la densidad alcanza.\n2. Si alcanza: en `dolarbackup/backend/src/components/PriceChart.tsx` cambiar el valor inicial de `intervalo` de 60 a 15 (dejar el comentario actualizado). Compilar con `cd dolarbackup/build && ./build.sh` (copia backend/src a build/src, compila con Vite y publica en docs/).\n3. Commit SOLO de código y build: `docs/assets`, `docs/index.html`, `dolarbackup/backend/src/components/PriceChart.tsx`. NO commitear archivos de datos (`data/historial_p2p.csv`, `docs/api/*.json`, `docs/history.json`): el bot los commitea cada minuto y generan conflictos. Si el push se rechaza, hacer `git fetch`, `git reset --hard FETCH_HEAD`, `git cherry-pick <commit propio>` resolviendo conflictos tomando la versión del bot (`git checkout --ours <archivo datos> && git add`) y volver a pushear. Verificar que el remoto tenga el asset nuevo.\n4. Esperar el build de GitHub Pages y verificar con curl que dolarbolivia.site sirve el bundle nuevo; opcionalmente una captura con chromium headless para ver las velas.\n5. Si la densidad NO alcanza (por ejemplo porque el cron de muestreo falló), NO cambiar nada: investigar por qué (revisar `logs/disparador_muestra.log` y los runs del workflow `muestreo`), dejarlo anotado y avisar.\n\nResponder en español, con el número medido (mediciones por bloque de 15m), qué se hizo, cómo se verificó y qué queda pendiente; cerrar con «Conclusión».",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "deepseek",
+      "model_snapshot": "deepseek-flash",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "monitor_script": null,
+      "monitor_url": null,
+      "monitor_state": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-19T16:56:47.943101-04:00",
+        "display": "once in 24h"
+      },
+      "schedule_display": "once in 24h",
+      "repeat": {
+        "times": 1,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-10-18T16:56:47.943261-04:00",
+      "next_run_at": "2026-10-19T16:56:47.943101-04:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "last_delivery_unverified": null,
+      "failure_streak": 0,
+      "deliver": "origin",
+      "origin": {
+        "platform": "discord",
+        "chat_id": "1551315228934017178",
+        "chat_name": "El servidor de Kevdy / #🤖-hermes",
+        "thread_id": null,
+        "user_id": "596806397660889106",
+        "scope_id": "1551311080104398969"
+      },
+      "enabled_toolsets": [
+        "terminal",
+        "files"
+      ],
+      "workdir": null
+    }
+  ],
+  "updated_at": "2026-10-18T16:56:47.975629-04:00"
+}

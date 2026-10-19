@@ -1,0 +1,11 @@
+*/3 * * * * /usr/bin/python3 /home/ubuntu/.hermes/scripts/gateway-watchdog.py >> /home/ubuntu/.hermes/logs/watchdog-cron.log 2>&1
+*/10 * * * * cd /home/ubuntu/.hermes/data/trading && /home/ubuntu/.hermes/data/trading/venv/bin/python vigilante_silencio.py >> logs/cron_vigilante.log 2>&1
+30 12 * * * cd /home/ubuntu/.hermes/data/trading && /home/ubuntu/.hermes/data/trading/venv/bin/python vigilante_silencio.py --parte >> logs/cron_vigilante.log 2>&1
+# parte diario de memecoins: DESACTIVADO a pedido (solo se quieren las ⚡ CALL). Reactivar quitando el '#'.
+#PAUSADO */5 * * * * /home/ubuntu/.hermes/data/memecoins/arrancar_vigia.sh
+#PAUSADO */5 * * * * set -a; . /home/ubuntu/.hermes/.env; set +a; /home/ubuntu/.hermes/data/dolarbolivia/tools/disparar_tasas.sh >> /home/ubuntu/.hermes/data/dolarbolivia/logs/disparador.log 2>&1
+#PAUSADO */10 * * * * cd /home/ubuntu/.hermes/data/memecoins && /usr/bin/flock -n /tmp/hermes-ath.lock /usr/bin/timeout 600 /usr/bin/prlimit --as=1572864000 -- /usr/bin/python3 ath_server.py --tope 12 >> logs/ath.log 2>&1
+#PAUSADO */5 * * * * /home/ubuntu/.hermes/data/trading/disparar_bot.sh
+*/3 * * * * /usr/bin/python3 /home/ubuntu/.hermes/scripts/guardia_memoria.py --cron >> /home/ubuntu/.hermes/logs/guardia_memoria.log 2>&1
+#PAUSADO * * * * * set -a; . /home/ubuntu/.hermes/.env; set +a; /home/ubuntu/.hermes/data/dolarbolivia/tools/disparar_muestra.sh
+0 */6 * * * /home/ubuntu/.hermes/scripts/sync_hermes_config.sh
