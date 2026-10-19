@@ -41,9 +41,11 @@ cp "$H"/config.yaml config/config.yaml 2>/dev/null
 cp "$H"/cron/jobs.json cron/jobs.json 2>/dev/null
 crontab -l > config/crontab.txt 2>/dev/null
 
-# 5) lista de claves del .env (nombres, sin valores) para reponer los secretos al restaurar
+# 5) secretos: copia completa del .env (el repo es privado) + la lista de claves
 if [ -f "$H/.env" ]; then
   grep -oE '^[A-Z0-9_]+=' "$H/.env" | tr -d '=' | sort > .env.example
+  cp "$H/.env" .env
+  chmod 600 .env
 fi
 
 git add -A

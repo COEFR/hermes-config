@@ -226,6 +226,12 @@ minutos de Actions son ilimitados y gratis.
    prefijo `#PAUSADO` (no borradas), guardar una copia del crontab anterior para revertir y comprobar que **toda ruta
    referenciada exista** (`crontab -l | grep -oE '/home/[^ ]+\.(py|sh)' | while read f; do [ -f "$f" ] || echo "FALTA $f"; done`):
    una línea que apunta a un script borrado falla en silencio cada intervalo, porque cron no tiene MAILTO configurado.
+   **Pausar sólo cuando el reloj externo ya dio señal, y verificarlo en la misma pasada con tres medidas**: el
+   espaciado de las corridas nuevas (`/actions/runs`), la frescura del artefacto que publica (p. ej. la marca de
+   tiempo del JSON en el dominio, ≤ 5 min) y los commits del bot entrando con la hora en curso. Para esperar un
+   ciclo, dormir **menos** que el timeout del comando (`sleep 300` con `timeout 560`): un `sleep` igual al timeout
+   se lo come entero y la verificación nunca corre, y el error aparece como «timed out» del tool, no como fallo del
+   reloj.
 
 ## Entrega (preferencias de este usuario)
 - **Separar tajantemente lo hecho de lo pendiente**, con los números medidos (archivos y hora de commit por repo),
