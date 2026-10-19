@@ -29,12 +29,14 @@ chmod +x ~/.hermes/scripts/*.sh
 
 ## 4. Cargar los secretos
 
+El `.env` completo (44 claves) está en el repo, así que alcanza con copiarlo:
+
 ```bash
-cp ~/hermes-config/.env.example ~/.hermes/.env.example   # lista de claves
-# crear ~/.hermes/.env y completar los valores (tokens de GitHub, Discord, Telegram,
-# Helius, claves de proveedores, etc.)
+cp ~/hermes-config/.env ~/.hermes/.env
 chmod 600 ~/.hermes/.env
 ```
+
+`.env.example` queda como inventario de claves para revisar que no falte ninguna.
 
 ## 5. Servicio del gateway
 
