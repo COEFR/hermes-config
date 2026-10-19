@@ -18,8 +18,8 @@ Repo de trabajo: `~/.hermes/data/dolarbolivia`, remoto `COEFR/dolarbolivia`, ram
 ## Pipeline de datos (lo que hace que las velas se vean bien)
 
 1. `tools/muestra.py` — **cada minuto**, guarda compra/venta con **4 decimales** = promedio de los 15 anuncios de Binance por lado (respaldo: la API de referencia). Es el único escritor del CSV.
-2. `.github/workflows/muestreo.yml` — corre `muestra.py` y commitea el CSV. Se dispara desde el VPS con `tools/disparar_muestra.sh` en el crontab (la línea necesita `set -a; . ~/.hermes/.env; set +a` delante o no hay token).
-3. `.github/workflows/tasas.yml` — corre `tools/importar_intradia.py`, `tools/importar_diario.py` y `tools/grafico.py`, y commitea `docs/api/grafico.json` + `data/historial_diario.json` + `data/historial_externo.json`.
+2. `.github/workflows/muestreo.yml` — corre `muestra.py` y commitea el CSV. Se dispara desde **cron-job.org** cada minuto (`workflow_dispatch` por API; la línea del crontab del VPS quedó `#PAUSADO`); a mano, `tools/disparar_muestra.sh` (la línea necesita `set -a; . ~/.hermes/.env; set +a` delante o no hay token).
+3. `.github/workflows/tasas.yml` — también desde **cron-job.org**, cada 5 min: corre `tools/importar_intradia.py`, `tools/importar_diario.py` y `tools/grafico.py`, y commitea `docs/api/grafico.json` + `data/historial_diario.json` + `data/historial_externo.json`.
 4. `tools/importar_diario.py` — histórico diario 2024→hoy desde el CSV abierto de dolarenbolivia.com (atribuido en el pie del gráfico).
 5. `tools/importar_intradia.py` — **tramos ya agregados** de la referencia (7 d de 15m, 30 d de 1h, 6 m de 4h, 1 a de 1d) a `data/historial_externo.json`; `grafico.py` los publica como `"ext"` y `PriceChart` usa el tramo **sólo si cubre el rango pedido** (`serieExt[0].time <= rango.desde + 3600`), prefiriendo `dia` para 1D. Es lo que quita las velas incompletas y los huecos de 15m/1h/4h sin inventar un dato.
 

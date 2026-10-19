@@ -68,16 +68,16 @@
     "created_at": "2026-10-18T22:57:30.186786+00:00",
     "created_by": "agent",
     "first_seen_at": null,
-    "last_patched_at": "2026-10-19T03:20:11.403214+00:00",
+    "last_patched_at": "2026-10-19T13:24:35.727632+00:00",
     "last_reused_patch_generation": 20,
-    "last_used_at": "2026-10-19T07:35:27.492075+00:00",
-    "last_viewed_at": "2026-10-19T07:35:27.488249+00:00",
-    "patch_count": 20,
-    "patch_generation": 20,
+    "last_used_at": "2026-10-19T13:24:14.553254+00:00",
+    "last_viewed_at": "2026-10-19T13:24:14.549172+00:00",
+    "patch_count": 21,
+    "patch_generation": 21,
     "pinned": false,
     "state": "active",
-    "use_count": 10,
-    "view_count": 10
+    "use_count": 11,
+    "view_count": 11
   },
   "github": {
     "archived_at": null,
@@ -260,16 +260,16 @@
     "created_at": "2026-10-19T06:09:26.091529+00:00",
     "created_by": "agent",
     "first_seen_at": null,
-    "last_patched_at": "2026-10-19T07:35:24.965592+00:00",
-    "last_reused_patch_generation": 0,
-    "last_used_at": "2026-10-19T07:34:50.284875+00:00",
-    "last_viewed_at": "2026-10-19T07:34:50.281736+00:00",
-    "patch_count": 4,
-    "patch_generation": 4,
+    "last_patched_at": "2026-10-19T14:33:39.992894+00:00",
+    "last_reused_patch_generation": 13,
+    "last_used_at": "2026-10-19T14:33:38.027984+00:00",
+    "last_viewed_at": "2026-10-19T14:33:38.024476+00:00",
+    "patch_count": 14,
+    "patch_generation": 14,
     "pinned": false,
     "state": "active",
-    "use_count": 1,
-    "view_count": 1
+    "use_count": 6,
+    "view_count": 6
   },
   "publicar-proyectos-github": {
     "archived_at": null,
@@ -342,13 +342,13 @@
     "first_seen_at": null,
     "last_patched_at": "2026-10-19T06:09:30.180605+00:00",
     "last_reused_patch_generation": 169,
-    "last_used_at": "2026-10-19T07:34:56.779637+00:00",
-    "last_viewed_at": "2026-10-19T07:34:56.776266+00:00",
+    "last_used_at": "2026-10-19T14:31:52.988272+00:00",
+    "last_viewed_at": "2026-10-19T14:31:52.985777+00:00",
     "patch_count": 169,
     "patch_generation": 169,
     "pinned": false,
     "state": "active",
-    "use_count": 84,
-    "view_count": 84
+    "use_count": 85,
+    "view_count": 85
   }
 }
