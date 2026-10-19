@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "installed": {
+    "hyperliquid": {
+      "source": "official",
+      "identifier": "official/blockchain/hyperliquid",
+      "trust_level": "builtin",
+      "scan_verdict": "safe",
+      "content_hash": "sha256:7f59db5416c3fd4f",
+      "install_path": "blockchain/hyperliquid",
+      "files": [
+        "SKILL.md",
+        "scripts/hyperliquid_client.py"
+      ],
+      "metadata": {},
+      "scan_provenance": {
+        "bundle_hash": "sha256:7f59db5416c3fd4f1364591a94e7f1047bb7aa880d4404c411afe93ff705ffc4",
+        "scanner_version": "skills-guard-v5",
+        "source": "official",
+        "source_url": "official/blockchain/hyperliquid",
+        "verdict": "safe",
+        "trust_level": "builtin",
+        "findings": [],
+        "rules": [],
+        "scanned_at": "2026-09-20T17:04:14.178553+00:00",
+        "summary": "hyperliquid: clean scan, no threats detected",
+        "fresh": false
+      },
+      "installed_at": "2026-09-20T17:04:31.077718+00:00",
+      "updated_at": "2026-09-20T17:04:31.077718+00:00"
+    },
+    "stocks": {
+      "source": "official",
+      "identifier": "official/finance/stocks",
+      "trust_level": "builtin",
+      "scan_verdict": "safe",
+      "content_hash": "sha256:501dcfd40853d969",
+      "install_path": "finance/stocks",
+      "files": [
+        "SKILL.md",
+        "scripts/stocks_client.py"
+      ],
+      "metadata": {},
+      "scan_provenance": {
+        "bundle_hash": "sha256:501dcfd40853d969bad6e9739163bad731bd5c621169c547d67f431e9865acd7",
+        "scanner_version": "skills-guard-v5",
+        "source": "official",
+        "source_url": "official/finance/stocks",
+        "verdict": "safe",
+        "trust_level": "builtin",
+        "findings": [
+          {
+            "pattern_id": "python_environ_get_secret",
+            "severity": "medium",
+            "category": "exfiltration",
+            "file": "scripts/stocks_client.py",
+            "line": 247,
+            "match": "key = os.environ.get(\"ALPHA_VANTAGE_KEY\")",
+            "description": "reads secret via os.environ.get() (normal API-key access; informational)"
+          },
+          {
+            "pattern_id": "python_environ_get_secret",
+            "severity": "medium",
+            "category": "exfiltration",
+            "file": "scripts/stocks_client.py",
+            "line": 381,
+            "match": "av_key = os.environ.get(\"ALPHA_VANTAGE_KEY\")",
+            "description": "reads secret via os.environ.get() (normal API-key access; informational)"
+          }
+        ],
+        "rules": [
+          "python_environ_get_secret"
+        ],
+        "scanned_at": "2026-09-20T17:04:15.272190+00:00",
+        "summary": "stocks: safe — 2 finding(s) in exfiltration",
+        "fresh": false
+      },
+      "installed_at": "2026-09-20T17:04:32.364783+00:00",
+      "updated_at": "2026-09-20T17:04:32.364783+00:00"
+    }
+  }
+}
