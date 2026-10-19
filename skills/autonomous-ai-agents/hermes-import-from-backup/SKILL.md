@@ -79,6 +79,12 @@ Contenido a cubrir: `skills/ plugins/ hooks/ memories/ config.yaml SOUL.md auth.
   dos minutos en la máquina nueva (iniciar sesión y recrear el `.env`); incluirlos deja la restauración en un
   paso pero mete las llaves maestras en el repo. Preguntar antes, y si acepta, advertir en el mismo mensaje que
   la privacidad del repo pasa a ser lo único que cubre esas claves.
+- **Si después de esa advertencia pide «subí los secretos», se suben y punto: sin repetir el sermón.** Copiar el `.env`
+  completo al repo privado (`cp` + `chmod 600`, y que el script de sincronización lo incluya en cada corrida), dejar
+  `.env.example` como inventario de claves, y cambiar el paso del `RESTORE.md` a `cp <repo>/.env ~/.hermes/.env`
+  (antes decía «completar los valores a mano»). Verificar por la API de contenidos —en un repo privado el `raw`
+  devuelve 404 y no prueba nada— y decir en **una línea** el único costo real: si el repo se hace público o suma
+  colaboradores, hay que rotar los tokens. Pedirlo dos veces es señal de que quiere el atajo, no de que no entendió.
 - **Verificar el contenido por nombres, no de memoria**: `tar tzf` y contar por directorio, y confirmar
   explícitamente si `auth.json` y `.env` están o no adentro. Una credencial que se cuela sin querer es el error
   más caro de esta tarea (medido: el `auth.json` entró en el primer armado y hubo que rehacerlo).

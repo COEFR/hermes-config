@@ -212,6 +212,20 @@ chart.timeScale().setVisibleLogicalRange({ from: 0, to: n - 1 });
 - **Elegir un default donde el precio se vea**: dos años en «Todo» dan un eje de 8 a 20 Bs y el precio actual ocupa
   2 px; abrir en 1 mes/1h y dejar «Todo» para la vista panorámica.
 
+### El borde derecho vacío no siempre es vista: la fuente todavía no publicó esa vela
+
+Dos casos medidos, con el mismo síntoma («las velas más recientes están en blanco»):
+
+- **La serie diaria termina ayer porque el CSV de origen se publica al día siguiente.** El precio de hoy sí está
+  arriba (viene de otro endpoint) y el gráfico en 1D/1S queda sin la vela de hoy → hay que **armarla con las
+  muestras propias** (el CSV propio ya tiene el día en curso) y emitirla como última vela del día.
+- **Los tramos intradía importados llegan con 10-60 min de retraso**, así que 15m/1h/4h terminan en la vela anterior.
+  Se agrega la **vela en curso** con las muestras más nuevas, recalculando open/high/low/close del bloque actual.
+
+Regla de diagnóstico: **comparar la fecha/hora de la última vela con la hora actual antes de tocar `barSpacing` o
+`fitContent`** — si el último `time` está una vela o un día atrás, el problema es el dato, no la vista. Y la prueba
+final es que la última vela coincida con el bloque de ahora y que su `close` sea el precio que muestra la cabecera.
+
 ## Velas planas («las barras se ven mal»): densidad de datos
 
 `lightweight-charts` dibuja el cuerpo con `open/close` y la mecha con `high/low`. Con **una sola medición por
